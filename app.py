@@ -1,9 +1,12 @@
-from flask import Flask
+import os
 
-from design_source import get_design
+from flask import Flask, request, jsonify
+
+from database_connector import DAO
 
 app = Flask(__name__)
-app.debug = True
+
+dao = DAO(os.environ['DATABASE_URL'])
 
 
 @app.route('/')
@@ -12,8 +15,16 @@ def root_endpoint():
 
 
 @app.route('/design')
-def get_designs_endpoint():
-    return get_design()
+def get_all_designs():
+    return jsonify(dao.get_design_ids())
+
+
+@app.route('/submitRating', methods=['POST'])
+def submit_rating():
+    ratings_dto = request.json
+    ratings = ratings_dto['ratings']
+    for rating in ratings:
+        dao.write_rating(rating.user_id, rating.design_id, rating.background_color, rating.rating)
 
 
 def main():
