@@ -2,10 +2,12 @@ import os
 import random
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 from database_connector import DAO
 
 app = Flask(__name__)
+CORS(app)
 
 dao = DAO(os.environ['DATABASE_URL'])
 
