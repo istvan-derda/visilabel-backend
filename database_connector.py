@@ -25,5 +25,6 @@ class DAO:
                 VALUES (%s, %s, %s, %s, %s)
                 """
             data = (user_id, design_id, background_color, rating, 1)
-            cursor.execute(SQL, data)
+            result = cursor.execute(SQL, data)
+            print(result)
             self.conn.commit()
