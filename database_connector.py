@@ -24,7 +24,7 @@ class DAO:
                 INSERT INTO rated_configurations (user_id, design_id, background_color, rating, impl_id)
                 VALUES (%s, %s, %s, %s, %s)
                 """
-            data = (user_id, design_id, background_color, rating, 1)
+            data = (user_id, design_id, background_color, rating, 2)
             result = cursor.execute(SQL, data)
             print(result)
             self.conn.commit()
