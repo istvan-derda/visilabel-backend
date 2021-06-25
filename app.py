@@ -37,6 +37,7 @@ def generate_random_hexstring():
 
 @app.route('/submitRating', methods=['POST'])
 def submit_rating():
+    print(request.is_json)
     ratings_dto = request.get_json()
     ratings = ratings_dto.ratings
     for rating in ratings:
