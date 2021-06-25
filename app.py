@@ -42,6 +42,7 @@ def submit_rating():
     ratings = ratings_dto["ratings"]
     for rating in ratings:
         dao.write_rating(rating["user_id"], rating["design_id"], rating["background_color"], rating["rating"])
+    return "done"
 
 
 def main():
