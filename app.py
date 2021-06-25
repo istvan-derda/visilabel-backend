@@ -20,6 +20,7 @@ def root_endpoint():
 @app.route('/toRate')
 def get_all_to_rate():
     design_ids = dao.get_all_design_ids()
+    random.shuffle(design_ids)
     batches = {"batches": [
         {"design_id": design_id[0], "background_colors": pick_background_colors()} for design_id in design_ids
     ]}
