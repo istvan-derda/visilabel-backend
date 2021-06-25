@@ -22,7 +22,7 @@ class DAO:
         with self.conn.cursor() as cursor:
             SQL = """
                 INSERT INTO rated_configurations (user_id, design_id, background_color, rating, impl_id)
-                VALUES (%s, %s %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s)
                 """
             data = (user_id, design_id, background_color, rating, 1)
             cursor.execute(SQL, data)
