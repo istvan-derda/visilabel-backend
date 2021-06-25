@@ -39,7 +39,7 @@ def generate_random_hexstring():
 def submit_rating():
     print(request.is_json)
     ratings_dto = request.get_json()
-    ratings = ratings_dto.ratings
+    ratings = ratings_dto["ratings"]
     for rating in ratings:
         dao.write_rating(rating.user_id, rating.design_id, rating.background_color, rating.rating)
 
