@@ -1,4 +1,5 @@
 import os
+import random
 
 from flask import Flask, request, jsonify
 
@@ -14,9 +15,22 @@ def root_endpoint():
     return "<h1>Visilable Backend</h1>"
 
 
-@app.route('/design')
-def get_all_designs():
-    return jsonify(dao.get_design_ids())
+@app.route('/toRate')
+def get_all_to_rate():
+    design_ids = dao.get_all_design_ids()
+    batches = {"batches": [
+        {"design_id": design_id, "background_colors": pick_background_colors()} for design_id in design_ids
+    ]}
+    return jsonify(batches)
+
+
+def pick_background_colors():
+    return [generate_random_hexstring() for _ in range(8)]
+
+
+def generate_random_hexstring():
+    r = lambda: random.randint(0, 255)
+    return '#%02X%02X%02X' % (r(), r(), r())
 
 
 @app.route('/submitRating', methods=['POST'])
