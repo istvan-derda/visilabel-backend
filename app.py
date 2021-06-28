@@ -10,7 +10,6 @@ app = Flask(__name__)
 CORS(app)
 
 dao = DAO(os.environ['DATABASE_URL'])
-r = random.Random("ß234075245")
 
 
 @app.route('/')
@@ -21,7 +20,7 @@ def root_endpoint():
 @app.route('/toRate')
 def get_all_to_rate():
     design_ids = dao.get_all_design_ids()
-    r.shuffle(design_ids)
+    random.shuffle(design_ids)
     batches = {"batches": [
         {"design_id": design_id[0], "background_colors": pick_background_colors()} for design_id in design_ids
     ]}
@@ -34,7 +33,7 @@ def pick_background_colors():
 
 def get_random_sprd_color():
     all_product_colors = dao.get_all_product_colors()
-    return str(r.choice(all_product_colors))
+    return str(random.choice(all_product_colors))
 
 
 @app.route('/submitRating', methods=['POST'])
