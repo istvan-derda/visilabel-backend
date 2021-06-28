@@ -8,12 +8,14 @@ class DAO:
     def __del__(self):
         self.conn.close()
 
-    def get_all_design_ids(self):
+    def get_100_design_ids(self):
         with self.conn.cursor() as cursor:
             cursor.execute(
                 """
                     SELECT *
                     FROM designs
+                    ORDER BY RANDOM()
+                    LIMIT 100
                 """
             )
             return cursor.fetchall()
