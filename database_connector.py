@@ -18,6 +18,14 @@ class DAO:
             )
             return cursor.fetchall()
 
+    def get_all_product_colors(self):
+        with self.conn.cursor() as cursor:
+            cursor.execute("""
+            SELECT * 
+            FROM sprd_product_colors
+            """)
+            return cursor.fetchall()
+
     def write_rating(self, user_id, design_id, background_color, rating):
         with self.conn.cursor() as cursor:
             SQL = """

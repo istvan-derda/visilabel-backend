@@ -28,12 +28,11 @@ def get_all_to_rate():
 
 
 def pick_background_colors():
-    return [generate_random_hexstring() for _ in range(8)]
+    return [get_random_sprd_color() for _ in range(8)]
 
 
-def generate_random_hexstring():
-    r = lambda: random.randint(0, 255)
-    return '#%02X%02X%02X' % (r(), r(), r())
+def get_random_sprd_color():
+    return random.choice(dao.get_all_product_colors())
 
 
 @app.route('/submitRating', methods=['POST'])
