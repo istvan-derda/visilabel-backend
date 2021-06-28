@@ -33,7 +33,9 @@ def pick_background_colors():
 
 
 def get_random_sprd_color():
-    return r.choice(dao.get_all_product_colors())
+    all_product_colors = dao.get_all_product_colors()
+    print(all_product_colors)
+    return r.choice(all_product_colors)
 
 
 @app.route('/submitRating', methods=['POST'])
