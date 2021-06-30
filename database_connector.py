@@ -3,7 +3,7 @@ import psycopg2
 
 class DAO:
     def __init__(self, database_url):
-        self.conn = psycopg2.connect(database_url, sslmode='require')
+        self.conn = psycopg2.connect(database_url)
 
     def __del__(self):
         self.conn.close()
