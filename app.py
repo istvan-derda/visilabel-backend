@@ -46,7 +46,7 @@ def submit_rating():
 
 
 def main():
-    app.run(port=5001)
+    app.run()
 
 
 if __name__ == '__main__':
