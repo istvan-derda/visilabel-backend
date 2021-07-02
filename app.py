@@ -27,12 +27,7 @@ def get_all_to_rate():
 
 
 def pick_background_colors():
-    return [get_random_sprd_color() for _ in range(8)]
-
-
-def get_random_sprd_color():
-    all_product_colors = [product_color_row[0] for product_color_row in dao.get_all_product_colors()]
-    return random.choice(all_product_colors)
+    return [product_color_row[0] for product_color_row in dao.get_all_product_colors()][:8]
 
 
 @app.route('/submitRating', methods=['POST'])

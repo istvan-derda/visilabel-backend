@@ -25,6 +25,7 @@ class DAO:
             cursor.execute("""
             SELECT * 
             FROM sprd_product_colors
+            ORDER BY RANDOM()
             """)
             return cursor.fetchall()
 
