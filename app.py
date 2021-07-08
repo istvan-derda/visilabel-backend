@@ -1,5 +1,4 @@
 import os
-import random
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -38,6 +37,22 @@ def submit_rating():
     for rating in ratings:
         dao.write_rating(rating["user_id"], rating["design_id"], rating["background_color"], rating["rating"])
     return "done"
+
+
+@app.route('/ratedBatchCount', methods=['GET'])
+def get_all_count():
+    count = dao.get_rated_count()[0][0]
+    rated_batch_count_dto = {'count': count}
+    return jsonify(rated_batch_count_dto)
+
+
+@app.route('/ratedBatchCountPerUser', methods=['POST'])
+def get_all_count():
+    user_id_dto = request.get_json()
+    user_id = user_id_dto['userId']
+    count = dao.get_rated_count_for_user(user_id)[0][0]
+    rated_batch_count_dto = {'count': count}
+    return jsonify(rated_batch_count_dto)
 
 
 def main():

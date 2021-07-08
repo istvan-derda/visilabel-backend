@@ -39,3 +39,20 @@ class DAO:
             result = cursor.execute(SQL, data)
             print(result)
             self.conn.commit()
+
+    def get_rated_count(self):
+        with self.conn.cursor() as cursor:
+            cursor.execute("""
+                SELECT count(*)
+                FROM rated_configurations
+            """)
+            return cursor.fetchall()
+
+    def get_rated_count_for_user(self, user_id):
+        with self.conn.cursor() as cursor:
+            cursor.execute("""
+                    SELECT count(*)
+                    FROM rated_configurations
+                    where user_id = %s
+                """, user_id)
+            return cursor.fetchall()
