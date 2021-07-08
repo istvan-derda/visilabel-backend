@@ -39,14 +39,14 @@ def submit_rating():
     return "done"
 
 
-@app.route('/ratedBatchCount', methods=['GET'])
+@app.route('/labelsCount', methods=['GET'])
 def get_all_count():
     count = dao.get_rated_count()[0][0]
     rated_batch_count_dto = {'count': count}
     return jsonify(rated_batch_count_dto)
 
 
-@app.route('/ratedBatchCountPerUser', methods=['POST'])
+@app.route('/labelsPerUserCount', methods=['POST'])
 def get_all_count_per_user():
     user_id_dto = request.get_json()
     user_id = user_id_dto['userId']
