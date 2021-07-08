@@ -47,7 +47,7 @@ def get_all_count():
 
 
 @app.route('/ratedBatchCountPerUser', methods=['POST'])
-def get_all_count():
+def get_all_count_per_user():
     user_id_dto = request.get_json()
     user_id = user_id_dto['userId']
     count = dao.get_rated_count_for_user(user_id)[0][0]
