@@ -51,7 +51,7 @@ def get_all_count_per_user():
     user_id_dto = request.get_json()
     user_id = user_id_dto['userId']
     count = dao.get_rated_count_for_user(user_id)[0][0]
-    labels_count_dto= {'count': count}
+    labels_count_dto = {'count': count}
     return jsonify(labels_count_dto)
 
 

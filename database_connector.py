@@ -1,6 +1,7 @@
 import psycopg2
 
 
+# noinspection SqlNoDataSourceInspection
 class DAO:
     def __init__(self, database_url):
         self.conn = psycopg2.connect(database_url)
@@ -53,6 +54,6 @@ class DAO:
             cursor.execute("""
                     SELECT count(*)
                     FROM rated_configurations
-                    where user_id = %s
+                    where user_id = '%s'
                 """, user_id)
             return cursor.fetchall()
