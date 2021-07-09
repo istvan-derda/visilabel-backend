@@ -51,9 +51,9 @@ class DAO:
 
     def get_rated_count_for_user(self, user_id):
         with self.conn.cursor() as cursor:
-            cursor.execute("""
+            cursor.execute(f"""
                     SELECT count(*)
                     FROM rated_configurations
-                    where user_id = '%s'
-                """, user_id)
+                    where user_id = '{user_id}'
+                """)
             return cursor.fetchall()
