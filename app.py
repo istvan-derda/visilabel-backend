@@ -17,11 +17,16 @@ def root_endpoint():
 
 
 @app.route('/toRate')
-def get_all_to_rate():
-    design_ids = dao.get_100_design_ids()
-    batches = {"batches": [
-        {"design_id": design_id[0], "background_colors": pick_background_colors()} for design_id in design_ids
-    ]}
+def get_batches_to_rate():
+    batches = dao.get_batches_with_one_label()
+    if len(batches) < 100:
+        batches.append(get_random_batches(100 - len(batches)))
+    return jsonify({"batches": batches})
+
+
+def get_random_batches(n):
+    design_ids = dao.get_design_ids(n)
+    batches = [{"design_id": design_id[0], "background_colors": pick_background_colors()} for design_id in design_ids]
     return jsonify(batches)
 
 
