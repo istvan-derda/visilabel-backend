@@ -32,7 +32,8 @@ class DAO:
                     GROUP BY design_id, background_color
                 ) AS rated_configurations_with_count
                 WHERE appeared_n_times = 1
-            ) ORDER BY RANDOM() LIMIT 100;""")
+            ) as distinct_configurations_labeled_once
+            ORDER BY RANDOM() LIMIT 100;""")
             design_ids = [row[0] for row in cursor.fetchmany(100)]
             batches = [self._get_batch_with_one_label(design_id) for design_id in design_ids]
             return batches
