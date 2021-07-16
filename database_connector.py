@@ -24,14 +24,16 @@ class DAO:
     def get_batches_with_one_label(self):
         with self.conn.cursor() as cursor:
             cursor.execute("""
-            SELECT DISTINCT design_id 
-            FROM (
-                SELECT count(*) AS appeared_n_times, design_id, background_color 
-                FROM rated_configurations 
-                GROUP BY design_id, background_color
-            ) AS rated_configurations_with_count
-            WHERE appeared_n_times = 1
-            LIMIT 100;""")
+            SELECT * FROM (
+                SELECT DISTINCT design_id 
+                FROM (
+                    SELECT count(*) AS appeared_n_times, design_id, background_color 
+                    FROM rated_configurations 
+                    GROUP BY design_id, background_color
+                ) AS rated_configurations_with_count
+                WHERE appeared_n_times = 1
+            ) as distinct_configurations_labeled_once
+            ORDER BY RANDOM() LIMIT 100;""")
             design_ids = [row[0] for row in cursor.fetchmany(100)]
             batches = [self._get_batch_with_one_label(design_id) for design_id in design_ids]
             return batches
@@ -52,7 +54,6 @@ class DAO:
             background_colors = [row[0] for row in cursor.fetchmany(8)]
             batch = {'design_id': design_id, 'background_colors': background_colors}
             return batch
-
 
     def get_all_product_colors(self):
         with self.conn.cursor() as cursor:
